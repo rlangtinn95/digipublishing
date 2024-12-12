@@ -7,11 +7,11 @@ const app = express()
 
 app.use(express.json())
 
-app.use(express.static(path.join(process.cwd(), 'public')));
+app.use(express.static(path.join(process.cwd(), 'public')))
 
 
 app.get("/", (req, res) => {
-      res.sendFile(path.join(process.cwd(), 'public', 'index.html'));
+      res.sendFile(path.join(process.cwd(), 'public', 'index.html'))
   });
 
 app.get("/info", async (req, res) =>{
@@ -32,30 +32,21 @@ app.post("/info", async (req, res) => {
       if (!/^\d{2}-\d{2}-\d{4}$/.test(birth_date)) {
           return res.status(400).json({ message: 'Invalid birthdate format. Please use DD-MM-YYYY.' });
       }
-  
-      // Parse birthdate into a moment object
-      const birthDateMoment = moment(birth_date, 'DD-MM-YYYY', true);
-      
-      // Check if birthdate is valid
+
+      const birthDateMoment = moment(birth_date, 'DD-MM-YYYY', true)
       if (!birthDateMoment.isValid()) {
-          return res.status(400).json({ message: 'Invalid birthdate.' });
+          return res.status(400).json({ message: 'Invalid birthdate.' })
       }
   
-      // Check if the person is at least 16 years old
-      const age = moment().diff(birthDateMoment, 'years');
+      const age = moment().diff(birthDateMoment, 'years')
       if (age < 16) {
-          return res.status(400).json({ message: 'You must be at least 16 years old.' });
+          return res.status(400).json({ message: 'You must be at least 16 years old.' })
       }
   
-      // Convert birthdate to MySQL-compatible format (YYYY-MM-DD)
       const birthDateForDB = birthDateMoment.format('YYYY-MM-DD');
-  
-      // If everything is valid, insert the data into the database
-      const infoid = await createPersonalInfo(first_name, last_name, e_mail, phone_number, birthDateForDB);
-      res.status(201).send(infoid);
+      const infoid = await createPersonalInfo(first_name, last_name, e_mail, phone_number, birthDateForDB)
+      res.status(201).send(infoid)
   });
-
-
 
 app.use((err, req, res, next) => {
       console.error(err.stack)

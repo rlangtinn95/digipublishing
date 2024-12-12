@@ -1,29 +1,29 @@
 document.getElementById("registration-form").addEventListener("submit", async function (event) {
-    event.preventDefault();
+    event.preventDefault()
 
-    const firstName = document.getElementById("first_name").value.trim();
-    const lastName = document.getElementById("last_name").value.trim();
-    const email = document.getElementById("e_mail").value.trim();
-    const phoneNumber = document.getElementById("phone_number").value.trim();
-    const birthDate = document.getElementById("birth_date").value.trim();
+    const firstName = document.getElementById("first_name").value.trim()
+    const lastName = document.getElementById("last_name").value.trim()
+    const email = document.getElementById("e_mail").value.trim()
+    const phoneNumber = document.getElementById("phone_number").value.trim()
+    const birthDate = document.getElementById("birth_date").value.trim()
 
-    // Client-side validation
+    //client-side validation
     if (!/^[A-Za-z]+$/.test(lastName)) {
-        alert("Last name must contain only one word.");
+        alert("Last name must contain only one word.")
         return;
     }
 
     if (!/^(9|4)\d{7}$/.test(phoneNumber)) {
-        alert("Phone number must be 8 digits and start with 9 or 4.");
+        alert("Phone number must be 8 digits and start with 9 or 4.")
         return;
     }
 
     if (!/^\d{2}-\d{2}-\d{4}$/.test(birthDate)) {
-        alert("Please enter a valid birthdate in DD-MM-YYYY format.");
+        alert("Please enter a valid birthdate in DD-MM-YYYY format.")
         return;
     }
 
-    // Send data to the server
+    //send data to the server
     try {
         const response = await fetch("http://localhost:8080/info", {
             method: "POST",
@@ -38,20 +38,20 @@ document.getElementById("registration-form").addEventListener("submit", async fu
         });
 
         if (!response.ok) {
-            const error = await response.json();
-            alert(error.message || "An error occurred.");
+            const error = await response.json()
+            alert(error.message || "An error occurred.")
             return;
         }
 
-        const newEntry = await response.json();
-        addEntryToList(newEntry);
+        const newEntry = await response.json()
+        addEntryToList(newEntry)
     } catch (error) {
-        console.error("Error:", error);
-        alert("An error occurred.");
+        console.error("Error:", error)
+        alert("An error occurred.")
     }
 });
 
-// Fetch existing data on load
+//fetch existing data on load
 (async function fetchData() {
     try {
         const response = await fetch("http://localhost:8080/info");
@@ -63,18 +63,17 @@ document.getElementById("registration-form").addEventListener("submit", async fu
 })();
 
 function formatDate(dateString) {
-    const date = new Date(dateString); // Create a Date object from the string
-    const day = String(date.getDate()).padStart(2, '0'); // Get day, ensuring 2 digits
-    const month = String(date.getMonth() + 1).padStart(2, '0'); // Get month (0-based), ensuring 2 digits
-    const year = date.getFullYear(); // Get the full year
-    
-    return `${day}.${month}.${year}`; // Return in DD.MM.YYYY format
+    const date = new Date(dateString)
+    const day = String(date.getDate()).padStart(2, '0')
+    const month = String(date.getMonth() + 1).padStart(2, '0')
+    const year = date.getFullYear()
+    return `${day}.${month}.${year}`
 }
 
 function addEntryToList(entry) {
-    const list = document.getElementById("data-list");
-    const listItem = document.createElement("li");
+    const list = document.getElementById("data-list")
+    const listItem = document.createElement("li")
     const formattedBirthDate = formatDate(entry.birth_date)
-    listItem.textContent = `Fornavn: ${entry.first_name}, Etternavn: ${entry.last_name}, E-post: ${entry.e_mail}, Telefonnummer: ${entry.phone_number}, Fødselsdato: ${formattedBirthDate}`;
-    list.insertBefore(listItem, list.firstChild);
+    listItem.textContent = `Fornavn: ${entry.first_name}, Etternavn: ${entry.last_name}, E-post: ${entry.e_mail}, Telefonnummer: ${entry.phone_number}, Fødselsdato: ${formattedBirthDate}`
+    list.insertBefore(listItem, list.firstChild)
 }
