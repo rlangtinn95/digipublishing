@@ -4,30 +4,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registration Form</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>Registrer deg her!</h1>
     <form id="registration-form">
-        <label for="first_name">Fornavn:</label><br>
-        <input type="text" id="first_name" name="first_name" required><br><br>
+        <h1>Registrer deg her!</h1>
+        <label for="first_name">Fornavn *:</label><br>
+        <input type="text" id="first_name" name="first_name" placeholder="Skriv inn fornavn her" required><br><br>
 
-        <label for="last_name">Etternavn*, kun ett:</label><br>
-        <input type="text" id="last_name" name="last_name" required><br><br>
+        <label for="last_name">Etternavn *:</label><br>
+        <input type="text" id="last_name" name="last_name" placeholder="Kun ett etternavn, ikke to" required><br><br>
 
-        <label for="e_mail">E-post (optional):</label><br>
-        <input type="email" id="e_mail" name="e_mail"><br><br>
+        <label for="e_mail">E-post:</label><br>
+        <input type="email" id="e_mail" name="e_mail" placeholder="example@example.com"><br><br>
 
-        <label for="phone_number">Telefonnummer (required, 8 digits, starts with 9 or 4):</label><br>
-        <input type="text" id="phone_number" name="phone_number" required><br><br>
+        <label for="phone_number">Telefonnummer *:</label><br>
+        <input type="text" id="phone_number" name="phone_number" placeholder="Må starte med 9 eller 4" required><br><br>
 
-        <label for="birth_date">Birth Date (required, format DD-MM-YYYY):</label><br>
-        <input type="text" id="birth_date" name="birth_date"><br><br>
+        <label for="birth_date">Fødselsdato *:</label><br>
+        <input type="text" id="birth_date" name="birth_date" placeholder="DD-MM-YYYY"><br><br>
         <p>Alle felter merket med * er obligatoriske.</p>
 
-        <button type="submit">Submit</button>
+        <button type="submit">Send</button>
     </form>
 
-    <h2>Submitted Data:</h2>
+    <h2>Data som er blitt sendt:</h2>
     <ul id="data-list"></ul>
 
     <script src="script.js"></script>
