@@ -1,9 +1,17 @@
 import express from 'express'
 import { getPersonalInfo, getSingleInfo, createPersonalInfo } from './database.js'
+import path from 'path'
 
 const app = express()
 
 app.use(express.json())
+
+app.use(express.static(path.join(process.cwd(), 'public')));
+
+
+app.get("/", (req, res) => {
+      res.sendFile(path.join(process.cwd(), 'public', 'index.html'));
+  });
 
 app.get("/info", async (req, res) =>{
       const info = await getPersonalInfo()
@@ -22,6 +30,8 @@ app.post("/info", async (req, res) => {
       const infoid = await createPersonalInfo(first_name, last_name, e_mail, phone_number, birth_date)
       res.status(201).send(infoid)
 })
+
+
 
 app.use((err, req, res, next) => {
       console.error(err.stack)

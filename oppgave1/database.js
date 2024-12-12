@@ -36,6 +36,7 @@ export async function getSingleInfo(id){
       return getSingleInfo(id)
 }
  
+console.log(createPersonalInfo)
 // const result = await createPersonalInfo('test','test','test@test.com','90909090','1990-05-04')
 // console.log(result)
 
