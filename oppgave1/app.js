@@ -28,6 +28,17 @@ app.get("/info/:id", async (req, res) =>{
 
 app.post("/info", async (req, res) => {
       const { first_name, last_name, e_mail, phone_number, birth_date } = req.body;
+
+      const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+      if (e_mail && !emailRegex.test(e_mail)) {
+          return res.status(400).json({ message: "Ugyldig e-mail-format." });
+      }
+
+      const phoneRegex = /^(9|4)\d{7}$/;
+      if (!phoneRegex.test(phone_number)) {
+          return res.status(400).json({ message:"Ugyldig telefonnummer. Det skal være 8 tall, og starte med enten 9 eller 4." });
+      }
+  
   
       if (!/^\d{2}-\d{2}-\d{4}$/.test(birth_date)) {
           return res.status(400).json({ message: 'Invalid birthdate format. Please use DD-MM-YYYY.' });

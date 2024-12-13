@@ -9,19 +9,19 @@ document.getElementById("registration-form").addEventListener("submit", async fu
 
     //client-side validation
     if (!/^[A-Za-z]+$/.test(lastName)) {
-        alert("Last name must contain only one word.")
+        alert("Etternavn skal bare være ett ord.")
         return;
     }
 
-    if (!/^(9|4)\d{7}$/.test(phoneNumber)) {
-        alert("Phone number must be 8 digits and start with 9 or 4.")
-        return;
+    if (!/^\d{8}$/.test(phoneNumber)) {
+        alert("Telefonnummer må være akkurat 8 nummer.");
+        return
     }
-
-    if (!/^\d{2}-\d{2}-\d{4}$/.test(birthDate)) {
-        alert("Please enter a valid birthdate in DD-MM-YYYY format.")
-        return;
-    }
+    
+    // if (!/^\d{2}-\d{2}-\d{4}$/.test(birthDate)) {
+    //     alert("Vennligst skriv inn en gyldig fødselsdato med formatet DD-MM-ÅÅÅÅ.")
+    //     return;
+    // }
 
     //send data to the server
     try {
