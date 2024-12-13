@@ -14,12 +14,13 @@ class AddOn
             $this->isFree = $isFree;
       }
 
-      // Getters and setters
+      //getter
       public function getId()
       {
             return $this->id;
       }
 
+      //setter
       public function setId($id)
       {
             $this->id = $id;
@@ -55,29 +56,28 @@ class AddOn
             $this->isFree = $isFree;
       }
 
-      // Save an add-on to the database
       public function save($db)
       {
             if ($this->id) {
-                  // Update existing add-on
+                  //updates existing add-on
                   $sql = "UPDATE add_ons SET name = ?, price = ?, is_free = ? WHERE id = ?";
                   $db->query($sql, [$this->name, $this->price, $this->isFree, $this->id]);
             } else {
-                  // Insert new add-on
+                  //inserts the new add-on
                   $sql = "INSERT INTO add_ons (name, price, is_free) VALUES (?, ?, ?)";
                   $db->query($sql, [$this->name, $this->price, $this->isFree]);
                   $this->id = $db->pdo->lastInsertId();
             }
       }
 
-      // Delete an add-on
+      //deletes the add-on
       public function delete($db)
       {
             $sql = "DELETE FROM add_ons WHERE id = ?";
             $db->query($sql, [$this->id]);
       }
 
-      // Fetch all add-ons
+      //gets all the add-ons
       public static function getAll($db)
       {
             return $db->fetchAll("SELECT * FROM add_ons");

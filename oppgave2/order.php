@@ -12,7 +12,6 @@ class Order
             $this->createdAt = date('Y-m-d H:i:s');
       }
 
-      // Getters and setters
       public function getId()
       {
             return $this->id;
@@ -38,15 +37,13 @@ class Order
             return $this->createdAt;
       }
 
-      // Save the order to the database
       public function save($db)
       {
             $sql = "INSERT INTO orders (total_price) VALUES (?)";
             $db->query($sql, [$this->totalPrice]);
-            $this->id = $db->getPDO()->lastInsertId(); // Use the getPDO method
+            $this->id = $db->getPDO()->lastInsertId();
       }
 
-      // Add items to the order (link drinks and add-ons)
       public function addItems($db, $items)
       {
             foreach ($items as $item) {

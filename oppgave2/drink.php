@@ -12,7 +12,6 @@ class Drink
             $this->price = $price;
       }
 
-      // Getters and setters
       public function getId()
       {
             return $this->id;
@@ -43,29 +42,24 @@ class Drink
             $this->price = $price;
       }
 
-      // Save a drink to the database
       public function save($db)
       {
             if ($this->id) {
-                  // Update existing drink
                   $sql = "UPDATE drinks SET name = ?, price = ? WHERE id = ?";
                   $db->query($sql, [$this->name, $this->price, $this->id]);
             } else {
-                  // Insert new drink
                   $sql = "INSERT INTO drinks (name, price) VALUES (?, ?)";
                   $db->query($sql, [$this->name, $this->price]);
                   $this->id = $db->pdo->lastInsertId();
             }
       }
 
-      // Delete a drink
       public function delete($db)
       {
             $sql = "DELETE FROM drinks WHERE id = ?";
             $db->query($sql, [$this->id]);
       }
 
-      // Fetch all drinks
       public static function getAll($db)
       {
             return $db->fetchAll("SELECT * FROM drinks");
