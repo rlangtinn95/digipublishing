@@ -1,6 +1,6 @@
 <?php
-include 'Database.php';
-include 'AddOn.php';
+include 'database.php';
+include 'addon.php';
 
 $db = new Database();
 $addOns = AddOn::getAll($db);

@@ -43,7 +43,7 @@ class Order
       {
             $sql = "INSERT INTO orders (total_price) VALUES (?)";
             $db->query($sql, [$this->totalPrice]);
-            $this->id = $db->pdo->lastInsertId();
+            $this->id = $db->getPDO()->lastInsertId(); // Use the getPDO method
       }
 
       // Add items to the order (link drinks and add-ons)

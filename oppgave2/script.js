@@ -108,7 +108,10 @@ document.addEventListener('DOMContentLoaded', () => {
                   })
               });
   
-              const receiptData = await response.json();
+              const textResponse = await response.text();  // Get raw response text
+              console.log(textResponse);  // Log the raw response
+          
+              const receiptData = JSON.parse(textResponse);  // Attempt to parse it as JSON
   
               // Show receipt
               receiptTotal.textContent = `Total Price: ${receiptData.totalPrice} kr`;

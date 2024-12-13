@@ -1,6 +1,6 @@
 <?php
-include 'Database.php';
-include 'Drink.php';
+include 'database.php';
+include 'drink.php';
 
 $db = new Database();
 $drinks = Drink::getAll($db);
