@@ -14,14 +14,9 @@ document.getElementById("registration-form").addEventListener("submit", async fu
     }
 
     if (!/^\d{8}$/.test(phoneNumber)) {
-        alert("Telefonnummer må være akkurat 8 nummer.");
+        alert("Telefonnummer må være akkurat 8 nummer.")
         return
     }
-    
-    // if (!/^\d{2}-\d{2}-\d{4}$/.test(birthDate)) {
-    //     alert("Vennligst skriv inn en gyldig fødselsdato med formatet DD-MM-ÅÅÅÅ.")
-    //     return;
-    // }
 
     //send data to the server
     try {
@@ -55,10 +50,10 @@ document.getElementById("registration-form").addEventListener("submit", async fu
 (async function fetchData() {
     try {
         const response = await fetch("http://localhost:8080/info");
-        const data = await response.json();
-        data.forEach(addEntryToList);
+        const data = await response.json()
+        data.forEach(addEntryToList)
     } catch (error) {
-        console.error("Error fetching data:", error);
+        console.error("Error fetching data:", error)
     }
 })();
 
