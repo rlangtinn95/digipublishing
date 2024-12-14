@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const drinksContainer = document.getElementById('drinks-container');
       const addonsContainer = document.getElementById('addons-container');
       const orderSummary = document.getElementById('order-summary');
+      const resetButton = document.getElementById('reset-order')
       const placeOrderButton = document.getElementById('place-order');
       const receipt = document.getElementById('receipt');
       const receiptTotal = document.getElementById('receipt-total');
@@ -27,6 +28,26 @@ document.addEventListener('DOMContentLoaded', () => {
           { id: 4, name: "Is", price: 0, isFree: true },
           { id: 5, name: "Sugerør", price: 0, isFree: true }
       ];
+
+      function resetOrder() {
+            selectedDrinks = [];
+            selectedAddOns = [];
+            totalPrice = 0;
+            orderItemsList.innerHTML = '';
+    
+            // Reset the total price display
+            totalPriceDisplay.textContent = 'Sum: 0 kr';
+    
+            // Uncheck all checkboxes (drinks and add-ons)
+            document.querySelectorAll('.drink-checkbox').forEach(checkbox => checkbox.checked = false);
+            document.querySelectorAll('.add-on-checkbox').forEach(checkbox => checkbox.checked = false);
+    
+            // Reset "double" checkboxes
+            document.querySelectorAll('.double-checkbox').forEach(checkbox => checkbox.checked = false);
+            receipt.style.display = 'none'
+        }
+
+        resetButton.addEventListener('click', resetOrder)
   
       function populateDrinks() {
             drinks.forEach(drink => {
@@ -166,7 +187,9 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
         
+      
       document.addEventListener('change', updateOrder);
+
   
       // Populate drinks and add-ons when the page is loaded
       populateDrinks();
