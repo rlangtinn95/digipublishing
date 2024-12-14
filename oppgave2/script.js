@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <label for="drink-${drink.id}">${drink.name} - ${drink.price} kr</label>
                     ${isDoubleOption ? `
                         <input type="checkbox" id="double-${drink.id}" class="double-checkbox" data-price="${drink.price}" data-drink="${drink.name}">
-                        <label for="double-${drink.id}">Double</label>` : ''}
+                        <label for="double-${drink.id}">Dobbel</label>` : ''}
                 `;
                 drinksContainer.appendChild(drinkElement);
             });
@@ -84,7 +84,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const doubleElement = document.querySelector(`#double-${drinkId}`);
                 if (doubleElement && doubleElement.checked) {
                     totalPrice += drinkPrice; // Double the price for this drink
-                    const doubleLabel = `Double ${drinkLabel}`;
+                    const doubleLabel = `Dobbel ${drinkLabel}`;
                     const li = document.createElement('li');
                     li.textContent = doubleLabel; // Show "Double Kaffe" or "Double Macchiato"
                     orderItemsList.appendChild(li);
@@ -144,7 +144,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     // Check if a double was selected for this drink
                     const doubleElement = document.querySelector(`#double-${drink.id}`);
                     if (doubleElement && doubleElement.checked) {
-                        const doubleLabel = `Double ${drinkName}`;
+                        const doubleLabel = `Dobbel ${drinkName}`;
                         const li = document.createElement('li');
                         li.textContent = doubleLabel; // Show the double drink in the receipt
                         receiptItems.appendChild(li);

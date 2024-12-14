@@ -37,12 +37,13 @@ class Order
             return $this->createdAt;
       }
 
-      public function save($db)
+      public function save($db, $details = null)
       {
-            $sql = "INSERT INTO orders (total_price) VALUES (?)";
-            $db->query($sql, [$this->totalPrice]);
+            $sql = "INSERT INTO orders (total_price, details) VALUES (?, ?)";
+            $db->query($sql, [$this->totalPrice, $details]);
             $this->id = $db->getPDO()->lastInsertId();
       }
+
 
       public function addItems($db, $items)
       {
