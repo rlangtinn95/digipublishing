@@ -21,11 +21,11 @@ document.addEventListener('DOMContentLoaded', () => {
       ];
   
       const addOns = [
-          { id: 1, name: "Milk", price: 5 },
-          { id: 2, name: "Sugar", price: 5 },
-          { id: 3, name: "Strawberry Straws", price: 5 },
-          { id: 4, name: "Ice", price: 0, isFree: true },
-          { id: 5, name: "Straw", price: 0, isFree: true }
+          { id: 1, name: "Melk", price: 5 },
+          { id: 2, name: "Sukker", price: 5 },
+          { id: 3, name: "Sjokoladedryss", price: 5 },
+          { id: 4, name: "Is", price: 0, isFree: true },
+          { id: 5, name: "Sugerør", price: 0, isFree: true }
       ];
   
       function populateDrinks() {
@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
               addOnElement.classList.add('add-on')
               addOnElement.innerHTML = `
                   <input type="checkbox" id="addon-${addOn.id}" data-id="${addOn.id}" data-price="${addOn.price}" class="add-on-checkbox">
-                  <label for="addon-${addOn.id}">${addOn.name} ${addOn.isFree ? '(Free)' : `- ${addOn.price} kr`}</label>
+                  <label for="addon-${addOn.id}">${addOn.name} ${addOn.isFree ? '- 0 kr' : `- ${addOn.price} kr`}</label>
               `
               addonsContainer.appendChild(addOnElement)
           })
@@ -83,12 +83,12 @@ document.addEventListener('DOMContentLoaded', () => {
               orderItemsList.appendChild(li)
           });
   
-          totalPriceDisplay.textContent = `Total Price: ${totalPrice} kr`
+          totalPriceDisplay.textContent = `Sum: ${totalPrice} kr`
       }
   
       placeOrderButton.addEventListener('click', async () => {
           if (selectedDrinks.length === 0) {
-              alert('Please select at least one drink.')
+              alert('Vennligst velg minst 1 drikke.')
               return;
           }
   
@@ -109,7 +109,7 @@ document.addEventListener('DOMContentLoaded', () => {
           
               const receiptData = JSON.parse(textResponse)
 
-              receiptTotal.textContent = `Total Price: ${receiptData.totalPrice} kr`
+              receiptTotal.textContent = `Sum: ${receiptData.totalPrice} kr`
               receiptItems.innerHTML = ''
               receiptData.items.forEach(item => {
                   const li = document.createElement('li');
@@ -118,7 +118,7 @@ document.addEventListener('DOMContentLoaded', () => {
               });
               receipt.style.display = 'block'
           } catch (error) {
-              console.error('Error placing order:', error)
+              console.error('Feil med ordre:', error)
           }
       })
   
