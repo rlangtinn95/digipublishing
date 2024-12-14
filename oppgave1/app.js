@@ -27,14 +27,14 @@ app.use(express.static(path.join(process.cwd(), 'public')))
     })
 
     app.post("/info", async (req, res) => {
-        const { first_name, last_name, e_mail, phone_number, birth_date } = req.body;
+        const { first_name, last_name, e_mail, phone_number, birth_date } = req.body
 
-        const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+        const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/
         if (e_mail && !emailRegex.test(e_mail)) {
             return res.status(400).json({ message: "Ugyldig e-mail. Du må ha med @" })
         }
 
-        const phoneRegex = /^(9|4)\d{7}$/;
+        const phoneRegex = /^(9|4)\d{7}$/
         if (!phoneRegex.test(phone_number)) {
             return res.status(400).json({ message:"Ugyldig telefonnummer. Det skal være 8 tall, og starte med enten 9 eller 4." })
         }
@@ -50,7 +50,7 @@ app.use(express.static(path.join(process.cwd(), 'public')))
             return res.status(400).json({ message: 'Ugyldig fødselsdato.' })
         }
 
-        const age = moment().diff(birthDateMoment, 'years');
+        const age = moment().diff(birthDateMoment, 'years')
         if (age < 16) {
             return res.status(400).json({ message: 'Du må være minst 16 år gammel.' })
         }

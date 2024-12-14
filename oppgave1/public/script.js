@@ -10,7 +10,7 @@
         //client-side validation
         if (!/^[A-Za-z]+$/.test(lastName)) {
             alert("Etternavn skal bare være ett ord.")
-            return;
+            return
         }
 
         if (!/^\d{8}$/.test(phoneNumber)) {
@@ -49,7 +49,7 @@
     //fetch existing data on load
     (async function fetchData() {
         try {
-            const response = await fetch("http://localhost:8080/info");
+            const response = await fetch("http://localhost:8080/info")
             const data = await response.json()
             data.forEach(addEntryToList)
         } catch (error) {
