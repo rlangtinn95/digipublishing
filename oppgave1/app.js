@@ -31,7 +31,7 @@ app.post("/info", async (req, res) => {
 
       const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
       if (e_mail && !emailRegex.test(e_mail)) {
-          return res.status(400).json({ message: "Ugyldig e-mail." })
+          return res.status(400).json({ message: "Ugyldig e-mail. Du må ha med @" })
       }
 
       const phoneRegex = /^(9|4)\d{7}$/;

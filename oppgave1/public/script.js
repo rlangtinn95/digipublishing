@@ -69,6 +69,10 @@ function addEntryToList(entry) {
     const list = document.getElementById("data-list")
     const listItem = document.createElement("li")
     const formattedBirthDate = formatDate(entry.birth_date)
-    listItem.textContent = `Fornavn: ${entry.first_name}, Etternavn: ${entry.last_name}, E-post: ${entry.e_mail}, Telefonnummer: ${entry.phone_number}, Fødselsdato: ${formattedBirthDate}`
+    listItem.textContent = `Fornavn: ${entry.first_name}, 
+                            Etternavn: ${entry.last_name}, 
+                            E-post: ${entry.e_mail}, 
+                            Telefonnummer: ${entry.phone_number}, 
+                            Fødselsdato: ${formattedBirthDate}`
     list.insertBefore(listItem, list.firstChild)
 }
