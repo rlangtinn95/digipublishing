@@ -1,19 +1,18 @@
 <?php
+// database.php
 class Database
 {
-      private $host = 'localhost';
-      private $dbname = 'coffee_shop';
-      private $username = 'root';
-      private $password = 'root';
       private $pdo;
 
       public function __construct()
       {
+            $config = require('config.php');
+
             try {
                   $this->pdo = new PDO(
-                        "mysql:host=$this->host;dbname=$this->dbname",
-                        $this->username,
-                        $this->password
+                        "mysql:host={$config['host']};dbname={$config['dbname']}",
+                        $config['username'],
+                        $config['password']
                   );
                   $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             } catch (PDOException $e) {
@@ -23,12 +22,9 @@ class Database
 
       public function query($sql, $params = [])
       {
-            if ($this->pdo) {
-                  $stmt = $this->pdo->prepare($sql);
-                  $stmt->execute($params);
-                  return $stmt;
-            }
-            throw new Exception("Database connection not established.");
+            $stmt = $this->pdo->prepare($sql);
+            $stmt->execute($params);
+            return $stmt;
       }
 
       public function fetchAll($sql, $params = [])
