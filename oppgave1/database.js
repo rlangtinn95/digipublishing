@@ -1,10 +1,12 @@
 import mysql from 'mysql2'
+import dotenv from 'dotenv'
+dotenv.config()
 
  const pool = mysql.createPool({
-      host: '127.0.0.1',
-      user: 'root',
-      password: 'nynur559',
-      database: 'registration_schema'
+      host: process.env.MYSQL_HOST,
+      user: process.env.MYSQL_USER,
+      password: process.env.MYSQL_PASSWORD,
+      database: process.env.MYSQL_DATABASE
 }).promise()
 
 export async function getPersonalInfo(){
@@ -37,9 +39,3 @@ export async function getSingleInfo(id){
 }
  
 console.log(createPersonalInfo)
-// const result = await createPersonalInfo('test','test','test@test.com','90909090','1990-05-04')
-// console.log(result)
-
-// const single_personal_information = await getSingleInformation(1)
-
-// console.log(single_personal_information)
