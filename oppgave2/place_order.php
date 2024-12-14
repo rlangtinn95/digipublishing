@@ -9,10 +9,23 @@ include 'order.php';
 
 try {
       $data = json_decode(file_get_contents('php://input'), true);
-      if (empty($data['drinks'])) {
-            // If no drinks are selected, return an error response
-            echo json_encode(['error' => 'No drinks selected']);
+      if (empty($data['drinks']) && empty($data['addOns'])) {
+            echo json_encode(['error' => 'Ordren må inneholde minst én drikk eller tillegg.']);
             exit;
+      }
+
+      foreach ($data['drinks'] as $drink) {
+            if (empty($drink['id'])) {
+                  echo json_encode(['error' => 'Drikk-ID mangler.']);
+                  exit;
+            }
+      }
+
+      foreach ($data['addOns'] as $addOn) {
+            if (empty($addOn['id'])) {
+                  echo json_encode(['error' => 'Tillegg-ID mangler.']);
+                  exit;
+            }
       }
 
       $db = new Database();
